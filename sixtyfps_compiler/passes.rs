@@ -105,14 +105,14 @@ pub async fn run_passes(
         lower_popups::lower_popups(component, &doc.local_registry, diag);
         lower_layout::lower_layouts(component, &mut type_loader, diag).await;
         z_order::reorder_by_z_order(component, diag);
-        lower_shadows::lower_shadow_properties(component, &doc.local_registry, diag);
-        clip::handle_clip(component, &global_type_registry.borrow(), diag);
         transform_and_opacity::handle_transform_and_opacity(
             component,
             &global_type_registry.borrow(),
             diag,
         );
         default_geometry::default_geometry(component, diag);
+        lower_shadows::lower_shadow_properties(component, &doc.local_registry, diag);
+        clip::handle_clip(component, &global_type_registry.borrow(), diag);
         visible::handle_visible(component, &global_type_registry.borrow());
         materialize_fake_properties::materialize_fake_properties(component);
     }
